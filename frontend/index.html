@@ -1,0 +1,35 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Storage DApp</title>
+</head>
+<body>
+    <h1>Simple Storage DApp</h1>
+    <input type="text" id="dataInput" placeholder="Enter data">
+    <button onclick="storeData()">Store Data</button>
+    <button onclick="retrieveData()">Retrieve Data</button>
+    <p id="result"></p>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.5.0.min.js"></script>
+    <script>
+        const provider = new ethers.providers.JsonRpcProvider('https://arb1.arbitrum.io/rpc');
+        const signer = new ethers.Wallet('<wallet address>', provider);
+        const contractAddress = '0x<private key>';
+        const simpleStorage = new ethers.Contract(contractAddress, ['storeData(string)', 'retrieveData()'], signer);
+
+        async function storeData() {
+            const dataInput = document.getElementById('dataInput').value;
+            await simpleStorage.storeData(dataInput);
+            document.getElementById('result').innerText = `Data stored: ${dataInput}`;
+        }
+
+        async function retrieveData() {
+            const result = await simpleStorage.retrieveData();
+            document.getElementById('result').innerText = `Retrieved data: ${result}`;
+        }
+    </script>
+</body>
+</html>
