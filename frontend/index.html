@@ -16,8 +16,8 @@
     <script src="https://cdn.ethers.io/lib/ethers-5.5.0.min.js"></script>
     <script>
         const provider = new ethers.providers.JsonRpcProvider('https://arb1.arbitrum.io/rpc');
-        const signer = new ethers.Wallet('<wallet address>', provider);
-        const contractAddress = '0x<private key>';
+        const signer = new ethers.Wallet('0x<private key>', provider);
+        const contractAddress = '<wallet address>';
         const simpleStorage = new ethers.Contract(contractAddress, ['storeData(string)', 'retrieveData()'], signer);
 
         async function storeData() {
